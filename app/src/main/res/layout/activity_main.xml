@@ -4,20 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="user"
             type="com.example.administrator.mydatabinding.User"/>
+        <variable
+            name="presenter"
+            type="com.example.administrator.mydatabinding.MainActivity.Presenter"/>
     </data>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context="com.example.administrator.mydatabinding.MainActivity">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="输入 first name"/>
+            android:hint="输入 first name"
+            android:onTextChanged="@{presenter::onTextChanged}"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,10 +32,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{user.firstName}"/>
+            android:text="@{user.firstName}"
+            android:onClick="@{presenter::onClick,default=默认数据}"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="@{()->presenter.onClickListenerBinding(user)}"
             android:text="@{user.lastName}"/>
 
     </LinearLayout>
